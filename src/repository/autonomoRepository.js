@@ -1,6 +1,6 @@
 import con from "./connection.js";
 
-export async function criarSenhaEautonomo(autonomo) {
+export async function cadastrarAutonomo(autonomo) {
     const comando = `
     insert into tb_autonomo(email, senha)
         values(?, ?);
@@ -9,6 +9,16 @@ export async function criarSenhaEautonomo(autonomo) {
     let resposta = await con.query(comando, [autonomo.email, autonomo.senha])
     let info = resposta[0]
     return info.insertId
+}
+
+export async function entradaDoAutonomo(autonomo){
+    const comando = `
+    select *
+    from tb_autonomo
+    where email = ? and senha = ?
+    `
+    let resposta = await con.query(comando, [autonomo.email, autonomo.senha])
+    return resposta[0]
 }
 
 export async function alterarSenhaDoAutonomo(autonomo) {
