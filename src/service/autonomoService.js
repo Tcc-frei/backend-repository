@@ -1,12 +1,15 @@
-import { cadastrarAutonomo } from "../repository/autonomoRepository.js";
-import validarCadastroAutonomo from "../validation/autonomoValidation.js";
+import { cadastrarAutonomo, entradaDoAutonomo } from "../repository/autonomoRepository.js";
+import {validarCadastroAutonomo, validarEntradaAutonomo} from "../validation/autonomoValidation.js";
 
-export default async function cadastrarAutonomoService(autonomo) {
+export async function cadastrarAutonomoService(autonomo) {
     validarCadastroAutonomo(autonomo)
     let id = await cadastrarAutonomo(autonomo)
     return id
 }
-export async function entradaDoAutonomoService(autonomo){
-    let id = []
-
+export async function entradaDoAutonomoService(id){
+    if(!id){
+        id = ``
+    }
+    let autonomo = await validarEntradaAutonomo(id)
+    return autonomo 
 }
