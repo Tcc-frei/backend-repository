@@ -11,15 +11,12 @@ export async function cadastrarAutonomo(autonomo) {
   return info.insertId;
 }
 
-export async function entradaDoAutonomo(autonomo) {
-  const comando = `
-    SELECT  id, 
-            email
-              FROM tb_autonomo
-                WHERE email = ? and senha = ?`;
+export async function entrar(autonomo) {
+  const comando = `SELECT id, email FROM tb_autonomo
+                          WHERE email = ? and senha = ?`;
 
   const resposta = await con.query(comando, [autonomo.email, autonomo.senha]);
-  return resposta[0];
+  return resposta[0][0];
 }
 
 // export async function alterarSenhaDoAutonomo(autonomo) {

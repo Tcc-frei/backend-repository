@@ -1,7 +1,4 @@
-import {
-  cadastrarAutonomo,
-  entradaDoAutonomo,
-} from "../repository/autonomoRepository.js";
+import { cadastrarAutonomo, entrar } from "../repository/autonomoRepository.js";
 import {
   validarCadastroAutonomo,
   validarEntradaAutonomo,
@@ -13,16 +10,12 @@ export async function cadastrarAutonomoService(autonomo) {
   return id;
 }
 
-export async function entradaDoAutonomoService(autonomo) {
+export async function validarEntrada(autonomo) {
   validarEntradaAutonomo(autonomo);
-  //   if (!id) {
-  //     id = ``;
-  //   }
-  //   let autonomo = await validarEntradaAutonomo(id);
-  //   return autonomo;
-  const registros = await entradaDoAutonomo(autonomo);
 
-  if (registros.length <= 0) throw new Error("E-mail ou senha inválidos !");
+  const registros = await entrar(autonomo);
 
-  return registros[0];
+  if (!registros) throw new Error("Email ou senha inválidos !");
+
+  return registros;
 }

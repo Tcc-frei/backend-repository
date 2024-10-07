@@ -1,10 +1,8 @@
 import * as db from "../repository/autonomoRepository.js";
 import {
   cadastrarAutonomoService,
-  entradaDoAutonomoService,
+  validarEntrada,
 } from "../service/autonomoService.js";
-// import { alterarSenhaDoAutonomo } from '../repository/autonomoRepository.js'
-import con from "../repository/connection.js";
 import Router from "express";
 const endpoint = Router();
 
@@ -21,11 +19,11 @@ endpoint.post("/elethronos/autonomo/cadastro", async (req, resp) => {
 
 endpoint.post("/elethronos/autonomo/entrada", async (req, resp) => {
   try {
-    const objAutonomo = req.body;
+    const autonomo = req.body;
 
-    const admin = await entradaDoAutonomoService(objAutonomo);
+    const admin = await validarEntrada(autonomo);
 
-    return resp.status(200).send(admin);
+    return resp.send(admin);
   } catch (error) {
     return resp.status(400).send({ erro: error.message });
   }
