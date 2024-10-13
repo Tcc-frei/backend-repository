@@ -12,3 +12,4 @@ export async function ValidarCadastroCliente(cliente) {
         throw new Error("email é obrigatório");
     }
 }
+

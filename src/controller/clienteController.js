@@ -16,3 +16,5 @@ endpoint.post("/elethronos/cadastrar/cliente", async  (req, resp) => {
     }
 
 })
+
+export default endpoint;
