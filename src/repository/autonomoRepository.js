@@ -12,8 +12,10 @@ export async function cadastrarAutonomo(autonomo) {
 }
 
 export async function entrar(autonomo) {
-  const comando = `SELECT id, email FROM tb_autonomo
-                          WHERE email = ? and senha = ?`;
+  const comando = `SELECT id_autonomo id,
+                          email
+                          FROM tb_autonomo
+                            WHERE email = ? and senha = ?`;
 
   const resposta = await con.query(comando, [autonomo.email, autonomo.senha]);
   return resposta[0][0];
