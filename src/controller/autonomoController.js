@@ -11,6 +11,8 @@ endpoint.post("/elethronos/entrar", async (req, resp) => {
 
     const admin = await validarEntrada(autonomo);
 
+    const token = gerarTokenJwt(admin);
+
     return resp.send({
       token: token,
     });
