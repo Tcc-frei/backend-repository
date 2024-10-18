@@ -1,10 +1,18 @@
 import con from "./connection.js";
 
+export async function criarOrcamento(orcamento) {
+  const comando = `INSERT INTO tb_orcamento (ds_orcamento)
+                                    VALUES (?)`;
+
+  const resposta = await con.query(comando, [orcamento.descricao]);
+  return resposta[0].insertId;
+}
+
 export async function deletarOrcamento(id) {
-    const comando = `
+  const comando = `
         delete from tb_orcamento
             where id_orcamento = ?
-    `
-    const resposta = await con.query(comando, [id])
-    return resposta[0].affectedRows
+    `;
+  const resposta = await con.query(comando, [id]);
+  return resposta[0].affectedRows;
 }
