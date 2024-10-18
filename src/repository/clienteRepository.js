@@ -10,3 +10,4 @@ export async function cadastrarCliente(cliente) {
     let info = resposta[0];
     return info.insertId
 }
+
