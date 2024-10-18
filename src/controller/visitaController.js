@@ -29,7 +29,11 @@ endpoint.get("/visita/:id", async (req, resp) => {
     const consulta = await consultarVisitaId(id);
 
     resp.send(consulta);
-  } catch (error) {}
+  } catch (error) {
+    return resp.status(400).send({
+      erro: error.message,
+    });
+  }
 });
 
 export default endpoint;
