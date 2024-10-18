@@ -16,11 +16,11 @@ export async function deletarVisita(id_visita) {
   return resp[0];
 }
 
-export async function pegarVisita(id_visita) {
+export async function consultarVisitas() {
   const comando = `SELECT * FROM tb_visita
                             JOIN tb_cliente ON tb_visita.id_cliente = tb_cliente.id_cliente`;
 
-  let resp = await con.query(comando, [id_visita]);
+  let resp = await con.query(comando);
   return resp[0];
 }
 

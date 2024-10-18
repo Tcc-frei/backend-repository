@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { criarServico } from "../repository/servicoRepository.js";
+import { criarServicoService } from "../service/servicoService.js";
 
 const endpoints = Router();
 
@@ -7,7 +7,7 @@ endpoints.post("/servico", async (req, resp) => {
   try {
     const servico = req.body;
 
-    const id = await criarServico(servico);
+    const id = await criarServicoService(servico);
 
     return resp.send({
       id: id,
