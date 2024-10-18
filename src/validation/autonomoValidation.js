@@ -7,7 +7,7 @@ export function validarCadastroAutonomo(autonomo) {
   }
 }
 
-export function validarEntradaAutonomo(autonomo) {
+export function validarEntrada(autonomo) {
   if (!autonomo.email) {
     throw new Error("Email é obrigatório");
   }

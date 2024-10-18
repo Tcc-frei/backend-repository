@@ -1,5 +1,4 @@
-import { validarEntrada } from "../service/autonomoService.js";
-
+import { validarAutonomoService } from "../service/autonomoService.js";
 import Router from "express";
 
 const endpoint = Router();
@@ -8,7 +7,7 @@ endpoint.post("/elethronos/entrar", async (req, resp) => {
   try {
     const autonomo = req.body;
 
-    const admin = await validarEntrada(autonomo);
+    const admin = await validarAutonomoService(autonomo);
 
     return resp.send(admin);
   } catch (error) {

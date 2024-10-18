@@ -1,7 +1,7 @@
 import { cadastrarAutonomo, entrar } from "../repository/autonomoRepository.js";
 import {
   validarCadastroAutonomo,
-  validarEntradaAutonomo,
+  validarEntrada
 } from "../validation/autonomoValidation.js";
 
 export async function cadastrarAutonomoService(autonomo) {
@@ -11,7 +11,7 @@ export async function cadastrarAutonomoService(autonomo) {
 }
 
 export async function validarAutonomoService(autonomo) {
-  validarEntradaAutonomo(autonomo);
+  validarEntrada(autonomo);
 
   const registros = await entrar(autonomo);
 
