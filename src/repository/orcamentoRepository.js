@@ -19,7 +19,7 @@ export async function consultarOrcamentoPorId(id) {
                       WHERE tb_orcamento.id_orcamento = ?`;
 
   let resp = await con.query(comando, [id]);
-  return resp[0];
+  return resp[0][0];
 }
 
 export async function consultarOrcamento() {
@@ -28,6 +28,23 @@ export async function consultarOrcamento() {
 
   let resp = await con.query(comando);
   return resp[0];
+}
+
+export async function atualizarTotalOrcamento(id) {
+  const comando = `UPDATE tb_orcamento O
+                    JOIN (
+                        SELECT SO.id_orcamento, SUM(S.vl_servico) as valorTotal
+                        FROM
+                            tb_servicos_orcamento SO
+                            JOIN tb_servico S ON S.id_servico = SO.id_servico
+                        GROUP BY
+                            SO.id_orcamento
+                    ) AS total ON O.id_orcamento = total.id_orcamento
+                SET O.vl_orcamento = total.valorTotal
+                WHERE O.id_orcamento = ?`;
+
+  const resposta = await con.query(comando, [id]);
+  return resposta[0].affectedRows;
 }
 
 export async function deletarOrcamento(id) {

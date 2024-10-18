@@ -1,4 +1,5 @@
 import {
+  atualizarTotalOrcamento,
   consultarOrcamentoPorId,
   criarOrcamento,
   deletarOrcamento,
@@ -42,6 +43,8 @@ endpoint.post("/orcamento/:idVisita", async (req, resp) => {
         await criarServicoOrcamento(idOrcamento, id);
       })
     );
+
+    await atualizarTotalOrcamento(idOrcamento);
 
     return resp.status(201).send();
   } catch (error) {
