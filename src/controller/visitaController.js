@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { cadastrarVisita, deletarVisita, pegarVisita } from "../repository/visitaRepository";
+import { cadastrarVisita, deletarVisita, pegarVisita } from "../repository/visitaRepository.js";
 import { cadastrarClientesService } from "../service/clienteService.js";
 
 const endpoint = Router()
