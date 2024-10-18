@@ -10,7 +10,7 @@ export async function cadastrarAutonomoService(autonomo) {
   return id;
 }
 
-export async function validarEntrada(autonomo) {
+export async function validarAutonomoService(autonomo) {
   validarEntradaAutonomo(autonomo);
 
   const registros = await entrar(autonomo);
