@@ -5,7 +5,9 @@ import "dotenv/config";
 const KEY = process.env.TOKEN_JWT;
 
 export function gerarTokenJwt(payload) {
-  return jwt.sign(payload, KEY);
+  return jwt.sign(payload, KEY, {
+    expiresIn: "1hr",
+  });
 }
 
 export function autenticacao(req, resp, next) {
