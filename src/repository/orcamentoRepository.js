@@ -8,6 +8,24 @@ export async function criarOrcamento(orcamento) {
   return resposta[0].insertId;
 }
 
+export async function consultarOrcamentoPorId(id){
+    const comando = ` SELECT * FROM tb_orcamento 
+                            JOIN tb_servicos_orcamento ON tb_orcamento.id_orcamento = tb_servicos_orcamento.id_servicos_orcamento
+                                    WHERE tb_orcamento.id_orcamento = ?`
+
+    let resp = await con.query(comando, [id])
+    return resp[0]
+}
+
+export async function consultarOrcamento(){
+    const comando = ` SELECT * FROM tb_orcamento 
+                            JOIN tb_servicos_orcamento ON tb_orcamento.id_orcamento = tb_servicos_orcamento.id_servicos_orcamento`
+
+    let resp = await con.query(comando)
+    return resp[0]
+}
+
+
 export async function deletarOrcamento(id) {
   const comando = `
         delete from tb_orcamento
