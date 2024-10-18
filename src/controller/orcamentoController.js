@@ -4,7 +4,10 @@ import {
   deletarOrcamento,
 } from "../repository/orcamentoRepository.js";
 import { Router } from "express";
-import { criarServicoOrcamento } from "../repository/servicosOrcamentoRepository.js";
+import {
+  consultarServicosOrcamento,
+  criarServicoOrcamento,
+} from "../repository/servicosOrcamentoRepository.js";
 const endpoint = Router();
 
 // retornar um orçamento pelo id
@@ -13,8 +16,12 @@ endpoint.get("/orcamento/:id", async (req, resp) => {
     const { id } = req.params;
 
     const orcamento = await consultarOrcamentoPorId(id);
+    const servicos = await consultarServicosOrcamento(id);
 
-    return resp.send(orcamento);
+    return resp.send({
+      orcamento,
+      servicos: servicos,
+    });
   } catch (error) {
     return resp.status(400).send({
       erro: error.message,
@@ -31,8 +38,8 @@ endpoint.post("/orcamento/:idVisita", async (req, resp) => {
     const idOrcamento = await criarOrcamento(descricao, idVisita);
 
     await Promise.all(
-      arrayServicos.map((id) => {
-        return criarServicoOrcamento(idOrcamento, id);
+      arrayServicos.map(async (id) => {
+        await criarServicoOrcamento(idOrcamento, id);
       })
     );
 
