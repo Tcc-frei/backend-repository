@@ -1,4 +1,4 @@
-import con from "./connection";
+import con from "./connection.js";
 
 export async function cadastrarVisita(visita){
     const comando = ` INSERT INTO tb_visita(dt_visita, id_cliente)
