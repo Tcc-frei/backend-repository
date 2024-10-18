@@ -10,10 +10,12 @@ export function gerarTokenJwt(payload) {
 
 export function autenticacao(req, resp, next) {
   try {
-    const token = req.headers["Authorization"].split("Bearer ")[1];
-    // const decoded = jwt.verify(token, KEY);
+    const token = req.headers["authorization"].split("Bearer ")[1];
+    const decoded = jwt.verify(token, KEY);
 
-    console.log(token);
+    req.user = { id: decoded.id, email: decoded.email };
+
+    next();
   } catch (error) {
     return resp.status(401).end();
   }

@@ -10,6 +10,8 @@ import { cadastrarClientesService } from "../service/clienteService.js";
 
 const endpoint = Router();
 
+import { autenticacao } from "../utils/jwt.js";
+
 endpoint.post("/cadastrar/visita", async (req, resp) => {
   try {
     let registro = await req.body;
@@ -23,7 +25,7 @@ endpoint.post("/cadastrar/visita", async (req, resp) => {
   } catch (error) {}
 });
 
-endpoint.get("/visita/:id", async (req, resp) => {
+endpoint.get("/visita/:id", autenticacao, async (req, resp) => {
   try {
     let id = req.params.id;
     const consulta = await consultarVisitaId(id);
