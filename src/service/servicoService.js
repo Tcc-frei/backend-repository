@@ -1,5 +1,5 @@
-import { criarServico } from "../repository/servicoRepository";
-import { validarBodyServico } from "../validation/servicoValidate";
+import { criarServico } from "../repository/servicoRepository.js";
+import { validarBodyServico } from "../validation/servicoValidate.js";
 
 export async function criarServicoService(servico) {
   validarBodyServico(servico);

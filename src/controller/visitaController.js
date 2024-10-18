@@ -4,7 +4,6 @@ import {
   cadastrarVisita,
   consultarVisitaId,
   deletarVisita,
-  pegarVisita,
 } from "../repository/visitaRepository.js";
 import { cadastrarClientesService } from "../service/clienteService.js";
 
@@ -27,7 +26,8 @@ endpoint.get("/visitas", async (req, resp) => {
 
 endpoint.post("/cadastrar/visita", async (req, resp) => {
   try {
-    let registro = await req.body;
+    let registro = req.body;
+
     const idCliente = await cadastrarClientesService(registro);
 
     const idVisita = await cadastrarVisita(registro.visita.data, idCliente);

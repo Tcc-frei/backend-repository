@@ -1,4 +1,4 @@
-import { consultarVisitas } from "../repository/visitaRepository";
+import { consultarVisitas } from "../repository/visitaRepository.js";
 
 export async function consultarVisitasService() {
   const visitas = await consultarVisitas();
