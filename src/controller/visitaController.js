@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   cadastrarVisita,
+  consultarVisitaId,
   deletarVisita,
   pegarVisita,
 } from "../repository/visitaRepository.js";
@@ -12,26 +13,22 @@ const endpoint = Router();
 endpoint.post("/cadastrar/visita", async (req, resp) => {
   try {
     let registro = await req.body;
-
     const idCliente = await cadastrarClientesService(registro);
 
-    const enviar = await cadastrarVisita(registro, idCliente);
+    const idVisita = await cadastrarVisita(registro.visita.data, idCliente);
 
-    resp.send({
-      idCliente: idCliente,
-      enviar: enviar,
+    return resp.send({
+      id: idVisita,
     });
   } catch (error) {}
 });
 
-endpoint.get("/buscar/rotas/:id", async (req, resp) => {
+endpoint.get("/visita/:id", async (req, resp) => {
   try {
-    let registro = req.params.id;
-    const consulta = await pegarVisita(registro);
+    let id = req.params.id;
+    const consulta = await consultarVisitaId(id);
 
-    resp.send({
-      cliente: consulta,
-    });
+    resp.send(consulta);
   } catch (error) {}
 });
 
