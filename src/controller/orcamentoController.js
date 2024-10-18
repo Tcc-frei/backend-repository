@@ -20,7 +20,7 @@ endpoint.get("/orcamento/:id", async (req, resp) => {
 
     return resp.send({
       orcamento,
-      servicos: servicos,
+      servicos: servicos.map((s) => s.serviço),
     });
   } catch (error) {
     return resp.status(400).send({
