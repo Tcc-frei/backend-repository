@@ -1,5 +1,4 @@
-import { validarEntrada } from "../service/autonomoService.js";
-
+import { validarEntrada } from "../validation/autonomoValidation.js";
 import Router from "express";
 import { gerarTokenJwt } from "../utils/jwt.js";
 
