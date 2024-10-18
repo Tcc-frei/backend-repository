@@ -1,10 +1,10 @@
 import con from "./connection.js";
 
-export async function criarOrcamento(orcamento) {
+export async function criarOrcamento(descricao) {
   const comando = `INSERT INTO tb_orcamento (ds_orcamento)
-                                    VALUES (?)`;
+                                    VALUES (?)`; // tem q enviar o id da visita
 
-  const resposta = await con.query(comando, [orcamento.descricao]);
+  const resposta = await con.query(comando, [descricao]);
   return resposta[0].insertId;
 }
 
