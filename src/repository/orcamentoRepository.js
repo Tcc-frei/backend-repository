@@ -22,11 +22,18 @@ export async function consultarOrcamentoPorId(id) {
   return resp[0][0];
 }
 
-export async function consultarOrcamento() {
-  const comando = ` SELECT * FROM tb_orcamento 
-                            JOIN tb_servicos_orcamento ON tb_orcamento.id_orcamento = tb_servicos_orcamento.id_servicos_orcamento`;
+export async function consultarOrcamentos() {
+  const comando = `SELECT
+                     O.id_orcamento id,
+                     O.dt_criado data,
+                     O.ds_status status,
+                     O.ds_orcamento "descricao",
+                     C.nome "cliente"
+                   FROM tb_orcamento O
+                    JOIN tb_visita V ON O.id_visita = V.id_visita
+                    JOIN tb_cliente C ON V.id_cliente = C.id_cliente;`;
 
-  let resp = await con.query(comando);
+  const resp = await con.query(comando);
   return resp[0];
 }
 

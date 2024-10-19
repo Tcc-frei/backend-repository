@@ -1,6 +1,7 @@
 import {
   atualizarTotalOrcamento,
   consultarOrcamentoPorId,
+  consultarOrcamentos,
   criarOrcamento,
   deletarOrcamento,
 } from "../repository/orcamentoRepository.js";
@@ -10,6 +11,19 @@ import {
   criarServicoOrcamento,
 } from "../repository/servicosOrcamentoRepository.js";
 const endpoint = Router();
+
+// retorna todos os orçamentos
+endpoint.get("/orcamentos", async (req, resp) => {
+  try {
+    const orcamentos = await consultarOrcamentos();
+
+    return resp.send(orcamentos);
+  } catch (error) {
+    return resp.status(400).send({
+      erro: error.message,
+    });
+  }
+});
 
 // retornar um orçamento pelo id
 endpoint.get("/orcamento/:id", async (req, resp) => {
