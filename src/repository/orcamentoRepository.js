@@ -9,14 +9,17 @@ export async function criarOrcamento(descricao, idVisita) {
 }
 
 export async function consultarOrcamentoPorId(id) {
-  const comando = `SELECT 
-                    id_orcamento  id,
-                    ds_status     status,
-                    ds_orcamento  descricao,
-                    dt_criado     data,
-                    vl_orcamento  total
-                    FROM tb_orcamento 
-                      WHERE tb_orcamento.id_orcamento = ?`;
+  const comando = `SELECT
+                    O.id_orcamento id,
+                    O.ds_status status,
+                    ds_orcamento descricao,
+                    C.nome cliente,
+                    dt_criado data,
+                    vl_orcamento total
+                   FROM tb_orcamento O
+                    JOIN tb_visita V ON O.id_visita = V.id_visita
+                    JOIN tb_cliente C ON V.id_cliente = C.id_cliente
+                   WHERE O.id_orcamento = ?`;
 
   let resp = await con.query(comando, [id]);
   return resp[0][0];
