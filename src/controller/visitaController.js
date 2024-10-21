@@ -27,7 +27,7 @@ endpoint.post("/cadastrar/visita", async (req, resp) => {
   try {
     let registro = req.body;
 
-    const idCliente = await cadastrarClientesService(registro);
+    const idCliente = await cadastrarClientesService(registro.cliente);
 
     const idVisita = await cadastrarVisita(registro.visita.data, idCliente);
 
