@@ -5,11 +5,16 @@ import {
   criarOrcamento,
   deletarOrcamento,
 } from "../repository/orcamentoRepository.js";
+
 import { Router } from "express";
+
 import {
   consultarServicosOrcamento,
   criarServicoOrcamento,
 } from "../repository/servicosOrcamentoRepository.js";
+
+import { atualizarStatusOrcamentoService } from "../service/orcamentoService.js";
+
 const endpoint = Router();
 
 // retorna todos os orçamentos
@@ -68,6 +73,21 @@ endpoint.post("/orcamento/:idVisita", async (req, resp) => {
   }
 });
 
+
+// atualiza o status do orçamento pelo id
+endpoint.get("/orcamento/status/:id", async (req, resp) => {
+  try {
+    const { id } = req.params;
+
+   await atualizarStatusOrcamentoService(id);
+
+    return resp.status(204).send();
+  } catch (error) {
+    return resp.status(400).send({
+      erro: error.message
+    })
+  }
+})
 // deletar um orçamento
 endpoint.delete("/orcamento/:id", async (req, resp) => {
   const { id } = req.params;
