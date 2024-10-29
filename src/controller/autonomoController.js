@@ -1,6 +1,9 @@
 import Router from "express";
-import { gerarTokenJwt } from "../utils/jwt.js";
-import { validarAutonomoService } from "../service/autonomoService.js";
+import { autenticacao, gerarTokenJwt } from "../utils/jwt.js";
+import {
+  validarAutonomoService,
+  verificarAutonomoService,
+} from "../service/autonomoService.js";
 
 const endpoint = Router();
 
@@ -17,6 +20,20 @@ endpoint.post("/elethronos/entrar", async (req, resp) => {
     });
   } catch (error) {
     return resp.status(400).send({ erro: error.message });
+  }
+});
+
+endpoint.get("/elethronos/validar", autenticacao, async (req, resp) => {
+  try {
+    const { id } = req.user;
+
+    await verificarAutonomoService(id);
+
+    return resp.status(204).send();
+  } catch (error) {
+    return resp.status(400).send({
+      erro: error.message,
+    });
   }
 });
 

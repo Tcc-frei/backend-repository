@@ -21,17 +21,8 @@ export async function entrar(autonomo) {
   return resposta[0][0];
 }
 
-// export async function alterarSenhaDoAutonomo(autonomo) {
-//     const comando = `
-//     update  tb_autonomo
-//         set
-//             senha = ?
-//     where id = ?
-//     `
-//     let resposta = await con.query(comando, [autonomo.senha])
-//     let info = resposta[0]
-//     return info.affectedRows
+export async function verificarAutonomo(id) {
+  const comando = `SELECT id_autonomo FROM tb_autonomo`;
 
-//      // isso foi uma tentativa de fazer uma alteração de senha para o autonomo, "funciona" porém da para melhorar
-
-// }
+  const resposta = await con.query(comando, [id]);
+}
