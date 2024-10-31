@@ -9,8 +9,8 @@ export async function cadastrarVisita(data, idCliente) {
 }
 
 export async function deletarVisita(id_visita) {
-  const comando = ` DELETE * FROM tb_visita
-                            WHERE id_visita = ?`;
+  const comando = `delete from tb_visita
+                            where id_visita = ?`;
 
   let resp = con.query(comando, [id_visita]);
   return resp[0];
