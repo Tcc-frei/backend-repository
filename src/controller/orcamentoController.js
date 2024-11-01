@@ -75,11 +75,12 @@ endpoint.post("/orcamento/:idVisita", async (req, resp) => {
 });
 
 // atualiza o status do orçamento pelo id
-endpoint.get("/orcamento/status/:id", async (req, resp) => {
+endpoint.put("/orcamento/status/:id", async (req, resp) => {
   try {
     const { id } = req.params;
+    const { status } = req.body;
 
-    await atualizarStatusOrcamentoService(id);
+    await atualizarStatusOrcamentoService(status, id);
 
     return resp.status(204).send();
   } catch (error) {
@@ -88,6 +89,7 @@ endpoint.get("/orcamento/status/:id", async (req, resp) => {
     });
   }
 });
+
 // deletar um orçamento
 endpoint.delete("/orcamento/:id", async (req, resp) => {
   const { id } = req.params;

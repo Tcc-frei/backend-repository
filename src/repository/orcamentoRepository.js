@@ -57,12 +57,12 @@ export async function atualizarTotalOrcamento(id) {
   return resposta[0].affectedRows;
 }
 
-export async function atualizarStatusOrcamento(id){
+export async function atualizarStatusOrcamento(status, id) {
   const comando = `UPDATE tb_orcamento
-                      SET ds_status = "aprovado"
+                      SET ds_status = ?
                         WHERE id_orcamento = ?`;
 
-  const resposta = await con.query(comando, [id]);
+  const resposta = await con.query(comando, [status, id]);
   return resposta[0].affectedRows;
 }
 
