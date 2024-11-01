@@ -19,7 +19,7 @@ create table tb_visita (
     ds_status   VARCHAR(100) DEFAULT "confirmado",
 
     id_cliente  int,
-    Foreign Key (id_cliente) REFERENCES tb_cliente(id_cliente)
+    Foreign Key (id_cliente) REFERENCES tb_cliente(id_cliente) on delete cascade
 );
 
 create table tb_orcamento (
@@ -30,7 +30,7 @@ create table tb_orcamento (
     vl_orcamento    DECIMAL(10, 2),
 
     id_visita       INT,
-    Foreign Key (id_visita) REFERENCES tb_visita(id_visita)
+    Foreign Key (id_visita) REFERENCES tb_visita(id_visita)  on delete cascade
 );
 
 create table tb_autonomo (
@@ -39,6 +39,7 @@ create table tb_autonomo (
     senha           VARCHAR(100)
 );
 
+insert into tb_autonomo (email, senha) values ('bruno@gmail.com', '123');
 
 create table tb_servico(
     id_servico int primary key auto_increment,
@@ -52,6 +53,8 @@ create table tb_servicos_orcamento (
     id_orcamento            INT,
     id_servico              INT,
 
-    Foreign Key (id_orcamento) REFERENCES tb_orcamento(id_orcamento),
-    Foreign Key (id_servico) REFERENCES tb_servico(id_servico)
+    Foreign Key (id_orcamento) REFERENCES tb_orcamento(id_orcamento)  on delete cascade,
+    Foreign Key (id_servico) REFERENCES tb_servico(id_servico)  on delete cascade
 );  
+
+
