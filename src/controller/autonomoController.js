@@ -31,9 +31,7 @@ endpoint.get("/elethronos/validar", autenticacao, async (req, resp) => {
 
     return resp.status(204).send();
   } catch (error) {
-    return resp.status(400).send({
-      erro: error.message,
-    });
+    return resp.status(401).send();
   }
 });
 
