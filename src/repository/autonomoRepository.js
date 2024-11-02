@@ -22,7 +22,9 @@ export async function entrar(autonomo) {
 }
 
 export async function verificarAutonomo(id) {
-  const comando = `SELECT id_autonomo FROM tb_autonomo`;
+  const comando = `SELECT id_autonomo FROM tb_autonomo
+                          WHERE id_autonomo = ?`;
 
   const resposta = await con.query(comando, [id]);
+  return resposta[0][0];
 }

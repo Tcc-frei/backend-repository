@@ -29,5 +29,7 @@ export async function verificarAutonomoService(id) {
 
   const autonomo = await verificarAutonomo(id);
 
+  if (!autonomo) throw new Error("Usuário inválido !");
+
   return autonomo;
 }
