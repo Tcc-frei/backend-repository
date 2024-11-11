@@ -64,7 +64,7 @@ create table tb_feedback(
 	ds_conteudo text,
     dt_feedback  datetime default current_timestamp, 
     
-    foreign key (id_autonomo) references tb_autonomo (id_autonomo)
+    foreign key (id_autonomo) references tb_autonomo (id_autonomo) on delete cascade
 );
 
 create table tb_resposta(
@@ -73,5 +73,5 @@ create table tb_resposta(
     ds_conteudo text,
     data_resposta datetime default current_timestamp,
 
-	foreign key (id_feedback) references tb_feedback (id_feedback)
+	foreign key (id_feedback) references tb_feedback (id_feedback) on delete cascade
 );
