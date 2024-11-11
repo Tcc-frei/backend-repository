@@ -58,3 +58,20 @@ create table tb_servicos_orcamento (
 );  
 
 
+create table tb_feedback(
+	id_feedback int primary key auto_increment,
+    id_autonomo int,
+	ds_conteudo text,
+    dt_feedback  datetime default current_timestamp, 
+    
+    foreign key (id_autonomo) references tb_autonomo (id_autonomo)
+);
+
+create table tb_resposta(
+	id_resposta int primary key auto_increment,
+    id_feedback int,
+    ds_conteudo text,
+    data_resposta datetime default current_timestamp,
+
+	foreign key (id_feedback) references tb_feedback (id_feedback)
+);
