@@ -24,7 +24,7 @@ endpoint.get('/feedback', async (req, resp) => {
 
         const mensagens = await consultarMensagensService(nome)
 
-        resp.status(200).send(mensagens)
+        resp.status(200).send({mensagens:mensagens})
     } catch (error) {
         resp.status(400).send(error)
     }
@@ -44,12 +44,12 @@ endpoint.get("/feedback/:id", async (req, resp) => {
 
 endpoint.put('feedback/:id', async (req, resp) => {
     try {
-        let feedback = req.body;
         let id = req.params.id;
+        let feedback = await req.body;
 
-        await atualizarMensagemService(feedback, id);
+        let resposta =  await atualizarMensagemService(id, feedback);
 
-        resp.status(204).send()
+        resp.status(204).send({resposta:resposta})
 
     } catch (error) {
         resp.status(400).send(error)

@@ -13,10 +13,10 @@ export async function consultarMensagensService(feedback) {
     return registros
 }
 
-export async function consultarMensagemPorIdService(feedback, id) {
+export async function consultarMensagemPorIdService(id) {
     if (!id) throw new Error("Parâmetro ID é obrigatorio.");
 
-    const mensagem = await consultarMensagemPorId(feedback, id)
+    const mensagem = await consultarMensagemPorId(id)
     return mensagem;
 }
 
@@ -29,7 +29,7 @@ export async function deletarMensagemService(id) {
 
 export async function atualizarMensagemService(feedback, id) {
     
-    let linhasAfetadas = await atualizarMensagem(feedback)
+    let linhasAfetadas = await atualizarMensagem(feedback, id)
     if(!linhasAfetadas)throw new Error(`parametro id ${id} não encontrado `)
     return linhasAfetadas
 }

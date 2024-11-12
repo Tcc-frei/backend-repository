@@ -17,23 +17,23 @@ export async function consultarMensagens() {
     return resp[0]
 }
 
-export async function consultarMensagemPorId(id_visita) {
+export async function consultarMensagemPorId(id) {
     const comando = `select * from tb_feedback where id_feedback = ?;`
 
-    let resp = await con.query(comando, [id_visita]);
+    let resp = await con.query(comando, [id]);
     return resp[0]
 }
 
-export async function deletarMensagem(id_feedback) {
+export async function deletarMensagem(id) {
     const comando = `delete from tb_feedback where id_feedback = ?;`
 
-    let resp = await con.query(comando, [id_feedback])
+    let resp = await con.query(comando, [id])
     return resp[0]
 }
 
 export async function atualizarMensagem(feedback, id) {
-    const comando = `update tb_feedback set ds_conteudo = ? where id_feedback = ?
+    const comando = `update tb_feedback set ds_conteudo = ? where id_feedback = ?, 
     `
     let resp = await con.query(comando, [feedback.conteudo, id])
-    return resp.affectedRows
+    return resp.affectedRows;
 }
