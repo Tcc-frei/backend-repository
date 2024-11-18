@@ -4,8 +4,9 @@ export async function criarResposta(id_feedback, resposta) {
   const comando = `INSERT INTO tb_resposta (id_feedback, ds_conteudo)
                         VALUES (?,?);
     `;
-  const resposta = await con.query(comando, [id_feedback, resposta.conteudo]);
-  const info = resposta[0];
+
+  const resp = await con.query(comando, [id_feedback, resposta.conteudo]);
+  const info = resp[0];
 
   return info.insertId;
 }

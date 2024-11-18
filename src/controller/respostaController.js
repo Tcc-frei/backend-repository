@@ -12,7 +12,7 @@ const endpoint = Router();
 
 endpoint.post("/resposta/:id_feedback", async (req, resp) => {
   try {
-    const resposta = await req.body;
+    const resposta = req.body;
     const { id_feedback } = req.params;
 
     const idMensagem = await criarRespostaService(id_feedback, resposta);
@@ -29,7 +29,7 @@ endpoint.get("/resposta", async (req, resp) => {
 
     const mensagens = await consultarRespostasService(nome);
 
-    resp.status(200).send({ mensagens: mensagens });
+    resp.status(200).send(mensagens);
   } catch (error) {
     resp.status(400).send(error);
   }
