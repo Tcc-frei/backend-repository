@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+import { transporter } from "../utils/email.js";
+import { feedbackEmailTemplate } from "../utils/emailTemplate.js";
+
 import {
   criarMensagemService,
   consultarMensagemPorIdService,
@@ -14,10 +17,22 @@ const endpoint = Router();
 
 endpoint.post("/feedback", autenticacao, async (req, resp) => {
   try {
-    const feedback = await req.body;
+    const feedback = req.body;
     const { id } = req.user; // id do autonomo que esta logado.
 
     const idMensagem = await criarMensagemService(id, feedback);
+
+    const info = await transporter.sendMail({
+      from: "infosolutions@gmail.com",
+      to: "rodrygo@gmail.com",
+      subject: "Agradecemos ao seu feedback ✔",
+      text: "Hello world?",
+      html: feedbackEmailTemplate(),
+    });
+
+    if (!info.accepted) {
+      throw new Error("Ocorreu um erro ao enviar o e-mail.");
+    }
 
     return resp.status(201).send({ idMensagem: idMensagem });
   } catch (error) {
