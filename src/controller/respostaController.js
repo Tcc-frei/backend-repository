@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+import { respostaEmailTemplate } from "../utils/emailTemplate.js";
+import { transporter } from "../utils/email.js";
+
 import {
   criarRespostaService,
   consultarRespostasService,
@@ -17,9 +20,21 @@ endpoint.post("/resposta/:id_feedback", async (req, resp) => {
 
     const idMensagem = await criarRespostaService(id_feedback, resposta);
 
+    const info = await transporter.sendMail({
+      from: "infosolutions@gmail.com",
+      to: "rodrygo@gmail.com",
+      subject: "Resposta ao seu feedback ✔",
+      text: "Hello world?",
+      html: respostaEmailTemplate(resposta.conteudo),
+    });
+
+    if (!info.accepted) {
+      throw new Error("Ocorreu um erro ao enviar o e-mail.");
+    }
+
     return resp.status(200).send({ idMensagem: idMensagem });
   } catch (error) {
-    resp.status(400).send({ error });
+    resp.status(400).send({ erro: error.message });
   }
 });
 
