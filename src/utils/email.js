@@ -1,5 +1,4 @@
 import { createTransport } from "nodemailer";
-import { feedbackEmailTemplate } from "./emailTemplate.js";
 
 export const transporter = createTransport({
   host: "smtp.ethereal.email",
